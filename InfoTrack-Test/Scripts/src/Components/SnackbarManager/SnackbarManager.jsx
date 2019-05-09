@@ -2,11 +2,8 @@
 import classNames from "classnames";
 import PropTypes from 'prop-types';
 
-//Redux
+//Redux (to connect redux with react)
 import { connect } from "react-redux";
-
-//Memoize
-import memoize from 'memoize-one';
 
 // Material UI
 // Core
@@ -14,12 +11,13 @@ import { withStyles } from '@material-ui/core/styles';
 // Components
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
 
+//Redux Actions
 import {
     hideMessage
 } from "../../Redux/actions.jsx";
 
+//This subscribe the component to Redux store updates
 const mapStateToProps = state => {
     return {
         message: state.message.text,
@@ -28,14 +26,17 @@ const mapStateToProps = state => {
     };
 };
 
+//This sets functions to dispatch actions to the store
 const mapDispatchToProps = dispatch => ({
     hideMessage: () => {
         dispatch(hideMessage());
     }
 });
 
-class SnackbarManager extends React.Component {
+//This component manages the behavior of the messages in the application
+class SnackbarManager extends React.PureComponent {
 
+    //Hide the snackbar after 5 sec or when the user click in the "close" button
     handleClose = () => {
         this.props.hideMessage();
     }
@@ -58,9 +59,7 @@ class SnackbarManager extends React.Component {
                     }}
                     message={<span id="message-id">{message}</span>}
                     action={[
-                        <Button className={classNames(classes.text, classes.buttonText)} key="undo" color="secondary" size="small" onClick={this.handleClose}>
-                            Close
-            </Button>
+                        <Button className={classNames(classes.text, classes.buttonText)} key="undo" color="secondary" size="small" onClick={this.handleClose}>Close</Button>
                     ]}
                     ContentProps={{
                         classes: {
@@ -71,6 +70,16 @@ class SnackbarManager extends React.Component {
             </div>
         );
     }
+}
+
+SnackbarManager.defaultProps = {
+    show: false
+};
+
+SnackbarManager.propTypes = {
+    message: PropTypes.string,
+    typeMessage: PropTypes.string,
+    show: PropTypes.boolean
 }
 
 const styles = theme => ({

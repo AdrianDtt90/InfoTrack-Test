@@ -28,6 +28,7 @@ namespace InfoTrack_Test.Controllers
             WebClient wc = new WebClient();
 
             //This create the google url which we are going to request the results
+            //As you can see in the url the code will search between 100 results
             string urlGoogleSearch = String.Concat("https://www.google.com/search?num=100&q=", keywords);
             //Now we download the string html from the search
             string htmlString = wc.DownloadString(urlGoogleSearch);

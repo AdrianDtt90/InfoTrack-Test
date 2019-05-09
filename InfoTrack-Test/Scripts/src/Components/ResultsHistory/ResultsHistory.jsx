@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import PropTypes from 'prop-types';
 
 //Redux
 import { connect } from "react-redux";
@@ -18,24 +19,29 @@ import Fab from '@material-ui/core/Fab';
 // Custom Components
 import GoogleSearcherResults from '../GoogleSearcherResults/GoogleSearcherResults.jsx';
 
+//Redux Actions
 import {
     hideResultHistory
 } from "../../Redux/actions.jsx";
 
+//This subscribe the component to Redux store updates
 const mapStateToProps = state => {
     return {
         listHistories: state.history.histories
     };
 };
 
+//This sets functions to dispatch actions to the store
 const mapDispatchToProps = dispatch => ({
     goToSearch: () => {
         dispatch(hideResultHistory());
     },
 });
 
+//This component displays the search history list
 class ResultsHistory extends React.Component {
 
+    //This show the Google Searcher component and hide this component
     handleGoToSearch = () => {
         this.props.goToSearch();
     }
@@ -80,7 +86,7 @@ class ResultsHistory extends React.Component {
 }
 
 ResultsHistory.propTypes = {
-
+    listHistories: PropTypes.array
 };
 
 const styles = theme => ({

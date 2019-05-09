@@ -11,6 +11,8 @@ import {
     HIDE_RESULT_HISTORY
 } from "./constants.jsx";
 
+
+//Reducer for the google results
 const result = (state = {}, action) => {
     switch (action.type) {
         case FIND_RESULTS: {
@@ -23,6 +25,7 @@ const result = (state = {}, action) => {
     }
 };
 
+//Reducer for the histories results
 const history = (state = { histories: [], visibility: false }, action) => {
     switch (action.type) {
         case ADD_RESULT_HISTORY: {
@@ -46,6 +49,7 @@ const history = (state = { histories: [], visibility: false }, action) => {
     }
 };
 
+//Reducer for the messages triggered by the Snackbar Manager component
 const message = (state = {}, action) => {
     switch (action.type) {
         
@@ -68,6 +72,7 @@ const message = (state = {}, action) => {
     }
 };
 
+//Reducer for the loading component
 const loading = (state = {}, action) => {
     switch (action.type) {
 
@@ -88,6 +93,7 @@ const loading = (state = {}, action) => {
     }
 };
 
+//We combine de reducer in one
 const rootReducer = combineReducers({
     result,
     history,

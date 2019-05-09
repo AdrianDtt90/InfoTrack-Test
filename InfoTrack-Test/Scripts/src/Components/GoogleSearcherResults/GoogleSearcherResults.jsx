@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import PropTypes from 'prop-types';
 
 // Material UI
 // Core
@@ -7,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
+//This component display the result of the search
 class GoogleSearcherResults extends React.Component {
     render() {
         const { classes, url, keywords, result } = this.props;
@@ -34,7 +36,9 @@ class GoogleSearcherResults extends React.Component {
 }
 
 GoogleSearcherResults.propTypes = {
-
+    url: PropTypes.string,
+    keywords: PropTypes.string,
+    result: PropTypes.string
 };
 
 const styles = theme => ({

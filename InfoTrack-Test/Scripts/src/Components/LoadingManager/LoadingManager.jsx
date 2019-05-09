@@ -10,22 +10,26 @@ import { withStyles } from '@material-ui/core/styles';
 // Components
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+//Redux Actions
 import {
     hideMessage
 } from "../../Redux/actions.jsx";
 
+//This subscribe the component to Redux store updates
 const mapStateToProps = state => {
     return {
         show: state.loading.show,
     };
 };
 
+//This sets functions to dispatch actions to the store
 const mapDispatchToProps = dispatch => ({
     hideMessage: () => {
         dispatch(hideMessage());
     }
 });
 
+//This component shows the CircularProgress
 function LoadingManager(props) {
     const { classes, show } = props;
 
@@ -41,7 +45,7 @@ function LoadingManager(props) {
 }
 
 LoadingManager.propTypes = {
-    classes: PropTypes.object.isRequired,
+    show: PropTypes.boolean
 };
 
 const styles = theme => ({

@@ -14,6 +14,7 @@ import LoadingManager from './LoadingManager/LoadingManager.jsx';
 import SnackbarManager from './SnackbarManager/SnackbarManager.jsx';
 
 
+//This component is the root of the application
 class App extends React.PureComponent {
     
     render() {

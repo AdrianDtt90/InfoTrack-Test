@@ -9,6 +9,8 @@
     HIDE_RESULT_HISTORY
 } from "./constants.jsx";
 
+//This creates the actions to modify the store
+
 export const findResults = results => ({
     type: FIND_RESULTS,
     results: results

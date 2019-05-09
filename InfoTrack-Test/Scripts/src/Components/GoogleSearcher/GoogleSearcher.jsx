@@ -18,6 +18,7 @@ import Fab from '@material-ui/core/Fab';
 // Custom Components
 import GoogleSearcherResults from '../GoogleSearcherResults/GoogleSearcherResults.jsx';
 
+//Redux Actions
 import {
     showResultHistory,
     showMessage,
@@ -26,12 +27,7 @@ import {
     addResultHistory
 } from "../../Redux/actions.jsx";
 
-const mapStateToProps = state => {
-    return {
-
-    };
-};
-
+//This sets functions to dispatch actions to the store
 const mapDispatchToProps = dispatch => ({
     goToHistory: () => {
         dispatch(showResultHistory());
@@ -53,6 +49,8 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
+
+//This component display the inputs to search in google
 class GoogleSearcher extends React.Component {
 
     constructor(props) {
@@ -68,12 +66,14 @@ class GoogleSearcher extends React.Component {
         }
     }
 
+    //This handle the inputs onChange event
     handleInput = (event, input) => {
         this.setState({
             [input]: event.target.value
         });
     }
 
+    //This retrive the inputs values and validate the form
     handleFindResults = () => {
         const { searching } = this.state;
         const { getResults, showMessage } = this.props;
@@ -89,6 +89,7 @@ class GoogleSearcher extends React.Component {
         }
     }
 
+    //This fetch the results from backend and display the result on the screen
     submitRequest = () => {
         const { url, keywords } = this.state;
         const { showMessage, showLoading, hideLoading, addResultHistory } = this.props;
@@ -96,7 +97,7 @@ class GoogleSearcher extends React.Component {
         showLoading();
         
         return (dispatch) => {
-            return fetch(`/home/getmensaje?url=${url}&keywords=${keywords}`)
+            return fetch(`/home/getsearchresult?url=${url}&keywords=${keywords}`)
                 .then((response) => {
                     return response.json();
                 })
@@ -112,6 +113,7 @@ class GoogleSearcher extends React.Component {
                         hideLoading();
                         showMessage('¡Successful response!', 'ok');
                     });
+
                 })
                 .catch((error) => {
                     hideLoading();
@@ -120,6 +122,7 @@ class GoogleSearcher extends React.Component {
         };
     }
 
+    //This validates each entry and verifies if we can continue with the search.
     validInputs = () => {
         const { url, keywords } = this.state;
         let error = {};
@@ -148,6 +151,7 @@ class GoogleSearcher extends React.Component {
         return true;
     }
 
+    //Reset the state
     handleReset = () => {
         this.setState({
             result: '',
@@ -159,6 +163,7 @@ class GoogleSearcher extends React.Component {
         });
     }
 
+    //This show the ResultsHistory component and hide this component
     handleGoToHistory = () => {
         this.props.goToHistory();
     }
@@ -246,7 +251,7 @@ class GoogleSearcher extends React.Component {
                     </Button>
 
                         <Button onClick={this.handleFindResults} disabled={!searching} variant="contained" color="primary" className={classes.button}>
-                            Find Results
+                            Go
                     </Button>
                     </CardActions>
                 </Card>
@@ -254,10 +259,6 @@ class GoogleSearcher extends React.Component {
         );
     }
 }
-
-GoogleSearcher.propTypes = {
-
-};
 
 const styles = theme => ({
     infomationText: {
@@ -291,6 +292,6 @@ const styles = theme => ({
 });
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(withStyles(styles)(GoogleSearcher));

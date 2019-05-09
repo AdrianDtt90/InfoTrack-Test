@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import PropTypes from 'prop-types';
 
 //Redux
 import { connect } from "react-redux";
@@ -15,18 +16,15 @@ import GoogleSearcher from '../GoogleSearcher/GoogleSearcher.jsx';
 import ResultsHistory from '../ResultsHistory/ResultsHistory.jsx';
 
 
+//This subscribe the component to Redux store updates
 const mapStateToProps = state => {
     return {
         showResultHistory: state.history.visibility
     };
 };
 
-const mapDispatchToProps = dispatch => ({
-    //mostrarCargando: (cargar) => {
-    //    dispatch(mostrarCargando(cargar));
-    //},
-});
-
+//This component contain the main content of the application
+//Display the GoogleSearcher and ResultsHistory
 class MainContainer extends React.PureComponent {
 
     render() {
@@ -51,7 +49,7 @@ class MainContainer extends React.PureComponent {
 }
 
 MainContainer.propTypes = {
-
+    showResultHistory: PropTypes.boolean
 };
 
 const styles = theme => ({
@@ -62,5 +60,5 @@ const styles = theme => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(withStyles(styles)(MainContainer));
