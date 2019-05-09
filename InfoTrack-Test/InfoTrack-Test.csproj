@@ -105,8 +105,12 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\jsx\Components\Comp1\Comp1.jsx" />
-    <Content Include="Scripts\jsx\index.jsx" />
+    <Content Include="Scripts\src\Components\App.jsx" />
+    <Content Include="Scripts\src\Components\GoogleSearcherResults\GoogleSearcherResults.jsx" />
+    <Content Include="Scripts\src\Components\GoogleSearcher\GoogleSearcher.jsx" />
+    <Content Include="Scripts\src\Components\MainContainer\MainContainer.jsx" />
+    <Content Include="Scripts\src\Components\ResultsHistory\ResultsHistory.jsx" />
+    <Content Include="Scripts\src\index.jsx" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
