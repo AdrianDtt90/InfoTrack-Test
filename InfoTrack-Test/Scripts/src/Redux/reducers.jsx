@@ -20,7 +20,7 @@ const result = (state = {}, action) => {
     }
 };
 
-const history = (state = {}, action) => {
+const history = (state = { visibility: false }, action) => {
     switch (action.type) {
         case ADD_RESULT_HISTORY: {
             return Object.assign({}, state, {

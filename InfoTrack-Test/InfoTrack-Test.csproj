@@ -110,8 +110,13 @@
     <Content Include="Scripts\src\Components\GoogleSearcher\GoogleSearcher.jsx" />
     <Content Include="Scripts\src\Components\MainContainer\MainContainer.jsx" />
     <Content Include="Scripts\src\Components\ResultsHistory\ResultsHistory.jsx" />
+    <Content Include="Scripts\src\Components\SnackbarManager\SnackbarManager.jsx" />
     <Content Include="Scripts\src\index.jsx" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\src\Redux\actions.jsx" />
+    <Content Include="Scripts\src\Redux\constants.jsx" />
+    <Content Include="Scripts\src\Redux\reducers.jsx" />
+    <Content Include="Scripts\src\Redux\store.jsx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

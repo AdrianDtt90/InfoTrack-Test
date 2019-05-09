@@ -12,6 +12,13 @@ import Typography from '@material-ui/core/Typography';
 import MainContainer from './MainContainer/MainContainer.jsx';
 import SnackbarManager from './SnackbarManager/SnackbarManager.jsx';
 
+
+
+//import Store from "../Redux/store.jsx";
+//import {
+//    findResults
+//} from "../Redux/actions.jsx";
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +31,7 @@ class App extends React.Component {
             })
             .then(function (myJson) {
                 debugger;
-                console.log(myJson);
+                Store.dispatch(findResults(myJson));
             });
     }
     render() {
