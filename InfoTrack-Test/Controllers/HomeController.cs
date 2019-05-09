@@ -11,46 +11,57 @@ namespace InfoTrack_Test.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        /// GET: HomePage
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult GetMensaje(string url = "infotrack.com.au", string keywords = "online title search")
+        /// <summary>
+        ///     This method will return a string of numbers about how many times and in which positions a certain URL is found according to a certain keywords.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="keywords"></param>
+        public ActionResult GetSearchResult(string url = "infotrack.com.au", string keywords = "online title search")
         {
-            //String str = "{ \"context_name\": { \"lower_bound\": \"value\", \"upper_bound\": \"value\", \"values\": [ \"value1\", \"valueN\" ] } }";
-            //JObject json = JObject.Parse(str);
-            //return Json(json, JsonRequestBehavior.AllowGet);
-
+            //This create the WebClient to do the search
             WebClient wc = new WebClient();
 
+            //This create the google url which we are going to request the results
             string urlGoogleSearch = String.Concat("https://www.google.com/search?num=100&q=", keywords);
+            //Now we download the string html from the search
             string htmlString = wc.DownloadString(urlGoogleSearch);
 
+            //This filter the string html with a pattern to get the tags which contain the urls
             Regex rulePatter = new Regex(@"<cite[^>]*>(.*?)</cite>", RegexOptions.Singleline);
             MatchCollection match = rulePatter.Matches(htmlString);
 
+            //With this foreach we gonna analyse which url match with the input
             string result = "";
             int position = 1;
+            //This prepare the pattern to find the url we want
             string searchPattern = String.Format(@"<cite[^>]*>(.*?){0}(.*?)</cite>", url);
             foreach (Match m in match)
             {
                 bool isMatch = Regex.IsMatch(m.ToString(), searchPattern);
 
-                if(isMatch)
+                //This checks the matches
+                if (isMatch)
                 {
+                    //If we have a match, we add the position to the result
                     result = String.Concat(result , position, ", ");
                 }
 
                 position++;
             }
 
+            //If no result
             if (result == "")
-                result = "0";
+                result = "0"; //If we have not a match, we set the result with 0
             else
-                result = result.Substring(0, result.Length - 2);
+                result = result.Substring(0, result.Length - 2);//If we have a result, we remove the las ", "
 
+            //Finally this return the result
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
