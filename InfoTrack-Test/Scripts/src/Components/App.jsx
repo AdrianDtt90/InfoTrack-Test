@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 // Custom Components
 import MainContainer from './MainContainer/MainContainer.jsx';
+import SnackbarManager from './SnackbarManager/SnackbarManager.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -31,6 +32,8 @@ class App extends React.Component {
 
         return (
             <div>
+                <SnackbarManager />
+
                 <AppBar position="static" color="default">
                     <Toolbar>
 
