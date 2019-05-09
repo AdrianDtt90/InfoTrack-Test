@@ -10,36 +10,19 @@ import Typography from '@material-ui/core/Typography';
 
 // Custom Components
 import MainContainer from './MainContainer/MainContainer.jsx';
+import LoadingManager from './LoadingManager/LoadingManager.jsx';
 import SnackbarManager from './SnackbarManager/SnackbarManager.jsx';
 
 
-
-//import Store from "../Redux/store.jsx";
-//import {
-//    findResults
-//} from "../Redux/actions.jsx";
-
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        fetch('/Home/getmensaje?url=wikipedia.org&keywords=aulica')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                debugger;
-                Store.dispatch(findResults(myJson));
-            });
-    }
+class App extends React.PureComponent {
+    
     render() {
         const { classes } = this.props;
 
         return (
             <div>
-                <SnackbarManager />
+                <LoadingManager />
+                <SnackbarManager />               
 
                 <AppBar position="static" color="default">
                     <Toolbar>

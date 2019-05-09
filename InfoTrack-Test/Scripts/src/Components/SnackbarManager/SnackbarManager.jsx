@@ -1,72 +1,98 @@
 ﻿import React from 'react';
+import classNames from "classnames";
 import PropTypes from 'prop-types';
+
+//Redux
+import { connect } from "react-redux";
+
+//Memoize
+import memoize from 'memoize-one';
+
+// Material UI
+// Core
 import { withStyles } from '@material-ui/core/styles';
+// Components
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 
-const styles = theme => ({
-    close: {
-        padding: theme.spacing.unit / 2,
-    },
+import {
+    hideMessage
+} from "../../Redux/actions.jsx";
+
+const mapStateToProps = state => {
+    return {
+        message: state.message.text,
+        typeMessage: state.message.typeMessage,
+        show: state.message.show,
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    hideMessage: () => {
+        dispatch(hideMessage());
+    }
 });
 
 class SnackbarManager extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            open: false,
-        };
+    handleClose = () => {
+        this.props.hideMessage();
     }
-    
-    //handleClick = () => {
-    //    this.setState({ open: true });
-    //};
-
-    handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        this.setState({ open: false });
-    };
 
     render() {
-        const { classes } = this.props;
+        const { classes, message, typeMessage, show } = this.props;
+        
         return (
             <div>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
-                        horizontal: 'left',
+                        horizontal: 'right',
                     }}
-                    open={this.state.open}
-                    autoHideDuration={6000}
+                    open={show || false}
+                    autoHideDuration={5000}
                     onClose={this.handleClose}
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
-                    message={<span id="message-id">Note archived</span>}
+                    message={<span id="message-id">{message}</span>}
                     action={[
-                        <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
-                            UNDO
-            </Button>,
-                        <IconButton
-                            key="close"
-                            aria-label="Close"
-                            color="inherit"
-                            className={classes.close}
-                            onClick={this.handleClose}
-                        >
-                            X
-                        </IconButton>,
+                        <Button className={classNames(classes.text, classes.buttonText)} key="undo" color="secondary" size="small" onClick={this.handleClose}>
+                            Close
+            </Button>
                     ]}
+                    ContentProps={{
+                        classes: {
+                            root: classNames(typeMessage == 'ok' ? classes.containerOK : classes.containerError, classes.text)
+                        }
+                    }}
                 />
             </div>
         );
     }
 }
 
+const styles = theme => ({
+    containerOK: {
+        background: theme.palette.ok.main
+    },
+    containerError: {
+        background: theme.palette.error.main
+    },
+    text: {
+        fontSize: '14px'
+    },
+    buttonText: {
+        color: '#fff'
+    },
+    close: {
+        padding: theme.spacing.unit / 2,
+    }
+});
 
-export default withStyles(styles)(SnackbarManager);
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withStyles(styles)(SnackbarManager));

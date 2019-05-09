@@ -27,14 +27,11 @@ const mapDispatchToProps = dispatch => ({
     //},
 });
 
-class MainContainer extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+class MainContainer extends React.PureComponent {
 
     render() {
         const { classes, showResultHistory } = this.props;
-        console.log("showResultHistory " + showResultHistory);
+        
         return (
             <Grid container className={classes.root} justify="center">
                 <Grid item xs={6} ms={6}>
@@ -62,8 +59,6 @@ const styles = theme => ({
         padding: '10px'
     }
 });
-
-connect
 
 export default connect(
     mapStateToProps,

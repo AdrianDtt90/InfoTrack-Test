@@ -17,6 +17,18 @@ const theme = createMuiTheme({
         secondary: {
             main: "rgb(255, 165, 0)"
         },
+        ok: {
+            main: '#43a047'
+        },
+        error: {
+            main: '#d32f2f'
+        },
+        warning: {
+            main: '#ffa000'
+        },
+        info: {
+            main: '#1976d2'
+        },
         text: {
             main: "#aaa"
         }

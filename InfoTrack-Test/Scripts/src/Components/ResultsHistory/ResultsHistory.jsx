@@ -24,7 +24,7 @@ import {
 
 const mapStateToProps = state => {
     return {
-
+        listHistories: state.history.histories
     };
 };
 
@@ -41,7 +41,7 @@ class ResultsHistory extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, listHistories } = this.props;
 
         return (
             <div {...this.props}>
@@ -51,19 +51,25 @@ class ResultsHistory extends React.Component {
                             <i class="material-icons">keyboard_arrow_left</i>
                         </Fab>
 
-                        <Typography variant="h2" color="inherit">
-                            Results History
-                    </Typography>
+                        <Typography variant="h2" color="inherit">Results History</Typography>
 
                         <List component="nav">
-                            <ListItem button>
-                                <ListItemText primary={<Typography variant="h5" color="inherit">10/10/2019 10:40pm</Typography>} className={classes.date} />
-                                <GoogleSearcherResults />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemText primary={<Typography variant="h5" color="inherit">10/10/2019 10:40pm</Typography>} className={classes.date} />
-                                <GoogleSearcherResults />
-                            </ListItem>
+
+                            {listHistories && listHistories instanceof Array && listHistories.length > 0 &&
+                                <React.Fragment>
+                                {listHistories.map((history, index) => {
+                                    return <ListItem button>
+                                        <ListItemText primary={<Typography variant="h5" color="inherit">{history.date}</Typography>} className={classes.date} />
+                                        <GoogleSearcherResults url={history.url} keywords={history.keywords} result={history.result} />
+                                    </ListItem>;
+                                    })}
+                                </React.Fragment>
+                                ||
+                                <ListItem button>
+                                    <Typography variant="h5" color="inherit">No Records</Typography>
+                                </ListItem>
+                            }
+
                         </List>
 
                     </CardContent>

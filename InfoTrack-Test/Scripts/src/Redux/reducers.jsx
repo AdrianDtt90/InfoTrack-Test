@@ -3,6 +3,9 @@
 import {
     FIND_RESULTS,
     SHOW_MESSAGE,
+    HIDE_MESSAGE,
+    SHOW_LOADING,
+    HIDE_LOADING,
     ADD_RESULT_HISTORY,
     SHOW_RESULT_HISTORY,
     HIDE_RESULT_HISTORY
@@ -20,11 +23,12 @@ const result = (state = {}, action) => {
     }
 };
 
-const history = (state = { visibility: false }, action) => {
+const history = (state = { histories: [], visibility: false }, action) => {
     switch (action.type) {
         case ADD_RESULT_HISTORY: {
+            const record = { date: (new Date).toGMTString(), url: action.data.url, keywords: action.data.keywords, result: action.data.result };
             return Object.assign({}, state, {
-                history: [...state.history, action.search]
+                histories: [record, ...state.histories]
             })
         }
         case SHOW_RESULT_HISTORY: {
@@ -44,11 +48,41 @@ const history = (state = { visibility: false }, action) => {
 
 const message = (state = {}, action) => {
     switch (action.type) {
+        
         case SHOW_MESSAGE: {
             return Object.assign({}, state, {
-                message: action.message
+                text: action.message,
+                typeMessage: action.typeMessage,
+                show: true
             });
         }
+
+        case HIDE_MESSAGE: {
+            return Object.assign({}, state, {
+                show: false
+            });
+        }
+
+        default:
+            return state;
+    }
+};
+
+const loading = (state = {}, action) => {
+    switch (action.type) {
+
+        case SHOW_LOADING: {
+            return Object.assign({}, state, {
+                show: true
+            });
+        }
+
+        case HIDE_LOADING: {
+            return Object.assign({}, state, {
+                show: false
+            });
+        }
+
         default:
             return state;
     }
@@ -57,7 +91,8 @@ const message = (state = {}, action) => {
 const rootReducer = combineReducers({
     result,
     history,
-    message
+    message,
+    loading
 });
 
 export default rootReducer;

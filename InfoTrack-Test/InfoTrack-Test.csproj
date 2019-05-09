@@ -108,6 +108,7 @@
     <Content Include="Scripts\src\Components\App.jsx" />
     <Content Include="Scripts\src\Components\GoogleSearcherResults\GoogleSearcherResults.jsx" />
     <Content Include="Scripts\src\Components\GoogleSearcher\GoogleSearcher.jsx" />
+    <Content Include="Scripts\src\Components\LoadingManager\LoadingManager.jsx" />
     <Content Include="Scripts\src\Components\MainContainer\MainContainer.jsx" />
     <Content Include="Scripts\src\Components\ResultsHistory\ResultsHistory.jsx" />
     <Content Include="Scripts\src\Components\SnackbarManager\SnackbarManager.jsx" />

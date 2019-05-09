@@ -1,6 +1,9 @@
 ﻿import {
     FIND_RESULTS,
     SHOW_MESSAGE,
+    HIDE_MESSAGE,
+    SHOW_LOADING,
+    HIDE_LOADING,
     ADD_RESULT_HISTORY,
     SHOW_RESULT_HISTORY,
     HIDE_RESULT_HISTORY
@@ -11,15 +14,32 @@ export const findResults = results => ({
     results: results
 });
 
-export const showSuccessMessage = message => ({
+export const showMessage = (message, typeMessage) => ({
     type: SHOW_MESSAGE,
+    message: message,
+    typeMessage: typeMessage
+});
+
+export const hideMessage = () => ({
+    type: HIDE_MESSAGE
+});
+
+export const showLoading = () => ({
+    type: SHOW_LOADING
+});
+
+export const hideLoading = () => ({
+    type: HIDE_LOADING
+});
+
+export const showMessageError = message => ({
+    type: SHOW_MESSAGE_ERROR,
     message: message
 });
 
-
-export const addResultHistory = search => ({
+export const addResultHistory = data => ({
     type: ADD_RESULT_HISTORY,
-    search: search
+    data: data
 });
 
 export const showResultHistory = () => ({
