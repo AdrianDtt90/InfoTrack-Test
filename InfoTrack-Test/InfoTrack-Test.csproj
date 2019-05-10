@@ -119,6 +119,7 @@
     <Content Include="Scripts\src\Redux\reducers.jsx" />
     <Content Include="Scripts\src\Redux\store.jsx" />
     <Content Include="Web.config" />
+    <Content Include="Scripts\src\index.test.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
