@@ -64,7 +64,7 @@ class ResultsHistory extends React.Component {
                             {listHistories && listHistories instanceof Array && listHistories.length > 0 &&
                                 <React.Fragment>
                                 {listHistories.map((history, index) => {
-                                    return <ListItem button>
+                                    return <ListItem key={index} button>
                                         <ListItemText primary={<Typography variant="h5" color="inherit">{history.date}</Typography>} className={classes.date} />
                                         <GoogleSearcherResults url={history.url} keywords={history.keywords} result={history.result} />
                                     </ListItem>;

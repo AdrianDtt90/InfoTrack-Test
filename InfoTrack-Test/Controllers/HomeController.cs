@@ -22,7 +22,15 @@ namespace InfoTrack_Test.Controllers
         /// </summary>
         /// <param name="url"></param>
         /// <param name="keywords"></param>
-        public ActionResult GetSearchResult(string url = "infotrack.com.au", string keywords = "online title search")
+        public ActionResult GetSearchResult(string url, string keywords)
+        {
+            string result = FindUrlsWithKeywords(url, keywords);
+
+            //Finally this return the result
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public string FindUrlsWithKeywords(string url = "infotrack.com.au", string keywords = "online title search")
         {
             //This create the WebClient to do the search
             WebClient wc = new WebClient();
@@ -50,7 +58,7 @@ namespace InfoTrack_Test.Controllers
                 if (isMatch)
                 {
                     //If we have a match, we add the position to the result
-                    result = String.Concat(result , position, ", ");
+                    result = String.Concat(result, position, ", ");
                 }
 
                 position++;
@@ -62,9 +70,7 @@ namespace InfoTrack_Test.Controllers
             else
                 result = result.Substring(0, result.Length - 2);//If we have a result, we remove the las ", "
 
-            //Finally this return the result
-            return Json(result, JsonRequestBehavior.AllowGet);
-
+            return result;
         }
     }
 }
