@@ -14,7 +14,9 @@ I developed in Visual Studio 2019, so my recomendation is using it and open it i
 
 ## Development
 This project consist in the frontend part (developed in ReactJS-Redux) and the backend part (developed in C#).
-Both have unit tests (frontend with Jest and backend with NUnit) and for running the solution, just open it in Visual Studio and press Play, reacts is already compiled.
+Both have unit tests (frontend with Jest and backend with NUnit). 
+For running the solution, first open the NuGet Console and install all the dependencies with "Update-Package -reinstall".
+After that, just press Play, reacts is already compiled.
 
 I could have developed the frontend separately with the backend as an APIRest and make request to the endpoints, but I thoungh that the application was quite small to develop it in that way so I ReactJS-Redux part in the View section of the C# solution.
 
