@@ -118,6 +118,7 @@
     <Content Include="Scripts\src\Redux\constants.jsx" />
     <Content Include="Scripts\src\Redux\reducers.jsx" />
     <Content Include="Scripts\src\Redux\store.jsx" />
+    <Content Include="Scripts\src\Utils\ServerRequests.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\src\index.test.js" />
   </ItemGroup>

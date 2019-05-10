@@ -18,6 +18,9 @@ import Fab from '@material-ui/core/Fab';
 // Custom Components
 import GoogleSearcherResults from '../GoogleSearcherResults/GoogleSearcherResults.jsx';
 
+//Utils
+import { triggerRequest } from '../../Utils/ServerRequests.js';
+
 //Redux Actions
 import {
     showResultHistory,
@@ -97,12 +100,10 @@ class GoogleSearcher extends React.Component {
         showLoading();
         
         return (dispatch) => {
-            return fetch(`/home/getsearchresult?url=${url}&keywords=${keywords}`)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((result) => {
 
+            return triggerRequest(
+                url, keywords,
+                (result) => {
                     this.setState({
                         result: result,
                         searching: false,
@@ -113,12 +114,12 @@ class GoogleSearcher extends React.Component {
                         hideLoading();
                         showMessage('¡Successful response!', 'ok');
                     });
-
-                })
-                .catch((error) => {
+                },
+                (error) => {
                     hideLoading();
                     showMessage('Error trying to fetch the results.', 'error');
-                });
+                }
+            );
         };
     }
 
