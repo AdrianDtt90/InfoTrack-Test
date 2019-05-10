@@ -32,7 +32,7 @@ class MainContainer extends React.PureComponent {
         
         return (
             <Grid container className={classes.root} justify="center">
-                <Grid item xs={6} ms={6}>
+                <Grid item xs={12} md={6} className={classes.grid}>
 
                     <Collapse in={!showResultHistory} >
                         <GoogleSearcher />
@@ -54,7 +54,10 @@ MainContainer.propTypes = {
 
 const styles = theme => ({
     root: {
-        padding: '10px'
+        padding: '20px'
+    },
+    grid: {
+        boxShadow: '0px 0px 4px 0px #888888'
     }
 });
 
